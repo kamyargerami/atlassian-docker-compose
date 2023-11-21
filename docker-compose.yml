@@ -1,0 +1,50 @@
+version: '3'
+services:
+  jira:
+    container_name: jira
+    image: atlassian/jira-software:${JIRA_VERSION:-latest}
+    restart: always
+    ports:
+      - '${FORWARD_JIRA_PORT:-8080}:8080'
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    networks:
+      - atlasian
+    volumes:
+      - jira_data:/var/atlassian/application-data/jira
+      - ./agent.back:/agent.jar:ro
+    environment:
+      - 'JAVA_OPTS="-javaagent:/agent.jar"'
+      - 'JVM_MINIMUM_MEMORY=512m'
+      - 'JVM_MAXIMUM_MEMORY=2048m'
+      - 'ATL_PROXY_NAME=${JIRA_URL:-127.0.0.1}'
+      - 'ATL_PROXY_PORT=${JIRA_PORT:-80}'
+      - 'ATL_TOMCAT_SCHEME=${JIRA_SCHEME:-http}'
+  confluence:
+    container_name: confluence
+    image: atlassian/confluence:${CONFLUENCE_VERSION:-latest}
+    restart: always
+    ports:
+      - '${FORWARD_CONFLUENCE_PORT:-8090}:8090'
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    networks:
+      - atlasian
+    volumes:
+      - confluence_data:/var/atlassian/application-data/confluence
+      - ./agent.back:/agent.jar:ro
+    environment:
+      - 'JAVA_OPTS="-javaagent:/agent.jar"'
+      - 'JVM_MINIMUM_MEMORY=512m'
+      - 'JVM_MAXIMUM_MEMORY=2048m'
+      - 'ATL_PROXY_NAME=${CONFLUENCE_URL:-127.0.0.1}'
+      - 'ATL_PROXY_PORT=${CONFLUENCE_PORT:-80}'
+      - 'ATL_TOMCAT_SCHEME=${CONFLUENCE_SCHEME:-http}'
+networks:
+  atlasian:
+    driver: bridge
+volumes:
+  jira_data:
+    driver: local
+  confluence_data:
+    driver: local

@@ -4,6 +4,7 @@ This project run & Activate Atlassian softwares as docker container, All program
 
 ## Run Application
 - Install docker and docker-compose.
+- Install Postgres database
 - Clone this project
 - Copy `.env.example` to `.env`
 - Edit `.env` file as you need - you need to edit urls and port
@@ -36,3 +37,9 @@ If activation doesn't work on latest version you can change it as below in `.env
 Last version for jira-software that I checked: 8.22.5
 
 Last version for confluence that I checked: 8.3.2
+
+### Database address
+
+You need to connect both apps to a database.
+
+You need to install Postgres on your machine and in installation setup you can use `host.docker.internal` as database address.

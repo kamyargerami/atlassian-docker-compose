@@ -6,7 +6,7 @@ This project run & Activate Atlassian softwares as docker container, All program
 - Install docker and docker-compose.
 - Clone this project
 - Copy `.env.example` to `.env`
-- Edit `.env` file as you need - you need to edit final url and port
+- Edit `.env` file as you need - you need to edit urls and port
 - Run docker-compose as below:
 
 ```

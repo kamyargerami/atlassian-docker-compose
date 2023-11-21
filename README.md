@@ -1,6 +1,6 @@
 # Atlassian Jira + Confluence with Docker and docker-compose
 
-This project run & Activate (crack) Atlassian software as docker container, All programs can be run behind a reverse proxy.
+This project run & Activate Atlassian softwares as docker container, All programs can be run behind a reverse proxy.
 
 ## Run Application
 - Install docker and docker-compose.
@@ -14,7 +14,7 @@ docker-compose up -d
 ```
 
 ## Activation
-If you need to activate the applications you can get the code by running this command:
+If you need to activate the applications you can get the activation code by running below command:
 
 ### Jira software
 
@@ -31,7 +31,7 @@ docker-compose exec confluence java -jar /agent.jar -d -m my@email.com -o mycomp
 ## Troubleshooting
 
 ### Version
-If activation doesn't work on latest version you can change it as below:
+If activation doesn't work on latest version you can change it as below in `.env` file:
 
 Last version for jira-software that I checked: 8.22.5
 
